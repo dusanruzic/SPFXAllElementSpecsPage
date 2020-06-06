@@ -1,0 +1,22 @@
+@import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
+
+
+.naslov{
+    text-shadow: 2px 2px;
+    text-shadow: 2px 2px 5px red;
+    font-family: "Lucida Console", Courier, monospace;
+  }
+  
+  .myButtons {
+    color:rgb(0, 120, 212);
+    border-color: rgb(0, 120, 212);
+    background-color: rgba(255, 255, 255, 0);
+    margin-bottom: 5px;
+  
+    &:hover {
+      border-width: 0.1em;
+      background-color: rgba(255, 255, 255, 0);
+      color:rgb(0, 120, 212);
+  
+    }
+  }
