@@ -63,10 +63,10 @@ export default class AllElementSpecsWebPart extends React.Component<IAllElementS
                   styles={searchBoxStyles}
                   placeholder="Search"
                   onEscape={ev => {
-                    console.log('Custom onEscape Called');
+                    //console.log('Custom onEscape Called');
                   }}
                   onClear={ev => {
-                    console.log('Custom onClear Called');
+                    //console.log('Custom onClear Called');
                   }}
                   onChange={(name) => this.getItemsByName(name)}
                   onSearch={newValue => console.log('SearchBox onSearch fired: ' + newValue)}
@@ -113,7 +113,7 @@ export default class AllElementSpecsWebPart extends React.Component<IAllElementS
               <div className="ms-Grid-row">
               
               {this.state.items.map(item => {
-                console.log(item);
+                //console.log(item);
                 let previewPropsa: IDocumentCardPreviewProps = {
                   previewImages: [
                     {
@@ -126,19 +126,22 @@ export default class AllElementSpecsWebPart extends React.Component<IAllElementS
                 };
                 if (item.AttachmentFiles.length > 0) {
                   previewPropsa.previewImages[0].previewImageSrc = `https://jvspdev.sharepoint.com${item.AttachmentFiles[0].ServerRelativeUrl}`
-                   console.log(item.AttachmentFiles[0].ServerRelativeUrl);
+                   //console.log(item.AttachmentFiles[0].ServerRelativeUrl);
                 }
       
                 let createdOn = new Date(item.Created);
-                let formatedDate = `${createdOn.toLocaleString("default", { month: "long" })} ${createdOn.getDay()}, ${createdOn.getFullYear()} at ${createdOn.getHours()}:${createdOn.getMinutes()}:${createdOn.getSeconds()}`;
-      
+                //let formatedDate = `${createdOn.toLocaleString("default", { month: "long" })} ${createdOn.getDay()}, ${createdOn.getFullYear()} at ${createdOn.getHours()}:${createdOn.getMinutes()}:${createdOn.getSeconds()}`;
+                let formatedDate = `${createdOn.toLocaleString("default", { month: "long" })} ${createdOn.getDate()}, ${createdOn.getFullYear()} at ${createdOn.toLocaleTimeString()}`;
+
+                let hrf = `${SharePointService.context.pageContext.web.absoluteUrl}/SitePages/elemspec${item.Id}.aspx`;
+
                  return (
       
                   
                       
                     <div className="ms-Grid-col ms-sm12 ms-md12 ms-lg6 ms-xl4"  style={{marginBottom:'5px'}}>
                           
-                          <DocumentCard onClickHref='http://bing.com'>
+                          <DocumentCard onClickHref= {hrf}>
                             <DocumentCardPreview { ...previewPropsa } 
                             />
                             <DocumentCardLocation
@@ -172,7 +175,7 @@ export default class AllElementSpecsWebPart extends React.Component<IAllElementS
     this.setState({loading: true});
     SharePointService.getListItems(SharePointService.elSpeclistID)
       .then(items => {
-        console.log(items);
+        //console.log(items);
         this.setState({
           items: items.value,
           loading: false
@@ -184,8 +187,8 @@ export default class AllElementSpecsWebPart extends React.Component<IAllElementS
     this.setState({loading: true});
     SharePointService.getListItemsFIltered(SharePointService.elSpeclistID, 'DRAFT')
       .then(items => {
-        console.log(items.value);
-        console.log('vratio');
+        //console.log(items.value);
+        //console.log('vratio');
         this.setState({
           items: items.value,
           loading: false
@@ -208,8 +211,8 @@ export default class AllElementSpecsWebPart extends React.Component<IAllElementS
     this.setState({loading: true});
     SharePointService.getListItemsFIltered(SharePointService.elSpeclistID, 'IMPLEMENTATION')
       .then(items => {
-        console.log(items.value);
-        console.log('vratio');
+        //console.log(items.value);
+        //console.log('vratio');
         this.setState({
           items: items.value,
           loading: false
@@ -242,13 +245,13 @@ export default class AllElementSpecsWebPart extends React.Component<IAllElementS
 
 
   public goToItem(itemID: number): void {
-    console.log(itemID);
-    window.location.href = `https://jvspdev.sharepoint.com/sites/AtlasCorpoProject/Lists/Idea/DispForm.aspx?ID=${itemID}`;
+    //console.log(itemID);
+    window.location.href = `${SharePointService.context.pageContext.web.absoluteUrl}/Lists/Idea/DispForm.aspx?ID=${itemID}`;
   }
 
   public returnUserByID(itemID: string): string {
-    console.log(itemID);
-    console.log('proba');
+    //console.log(itemID);
+    //console.log('proba');
     SharePointService.getUserByID(itemID)
     .then(item => {
       return item;
@@ -260,7 +263,7 @@ export default class AllElementSpecsWebPart extends React.Component<IAllElementS
   public getUsers(): void {
     SharePointService.getUsers()
       .then(users => {
-        console.log(users.value[1]);
+        //console.log(users.value[1]);
         this.setState({
           users: users.value,
         });
@@ -272,16 +275,16 @@ export default class AllElementSpecsWebPart extends React.Component<IAllElementS
   }
 
   public getItemsByName(name: string): void {
-    console.log(name);
+    //console.log(name);
     SharePointService.getListItems(SharePointService.elSpeclistID)
       .then(
         
         items => {
-          let ideas = items.value.filter((idea) => idea.Title.toUpperCase().indexOf(name.toUpperCase()) !== -1 );
-          console.log(ideas);
-        console.log('vratio');
+          let elspecs = items.value.filter((el) => el.Title.toUpperCase().indexOf(name.toUpperCase()) !== -1  || el.Description.toUpperCase().indexOf(name.toUpperCase()) !== -1);
+          //console.log(ideas);
+        //console.log('vratio');
         this.setState({
-          items: ideas,
+          items: elspecs,
         });
       });
   }
