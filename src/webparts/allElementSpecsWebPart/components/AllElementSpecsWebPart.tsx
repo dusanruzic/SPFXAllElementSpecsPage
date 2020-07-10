@@ -28,7 +28,7 @@ export default class AllElementSpecsWebPart extends React.Component<IAllElementS
     this.getImplementation = this.getImplementation.bind(this);
     this.getDraft = this.getDraft.bind(this);
     this.getTesting = this.getTesting.bind(this);
-    this.getReleased = this.getReleased.bind(this);
+    this.getRelease = this.getRelease.bind(this);
     this.getUnderDevelopment = this.getUnderDevelopment.bind(this);
     this.goToItem = this.goToItem.bind(this);
     this.returnUserByID = this.returnUserByID.bind(this);
@@ -100,8 +100,8 @@ export default class AllElementSpecsWebPart extends React.Component<IAllElementS
               <span>Testing</span>
             </Button>
 
-            <Button className={styles.myButtons} buttonType={ ButtonType.normal }  title='Released' ariaLabel='Released' style={{marginLeft:"15px"}} onClick={this.getReleased}>
-              <span>Released</span>
+            <Button className={styles.myButtons} buttonType={ ButtonType.normal }  title='Release' ariaLabel='Release' style={{marginLeft:"15px"}} onClick={this.getRelease}>
+              <span>Release</span>
             </Button>
       
       
@@ -231,9 +231,9 @@ export default class AllElementSpecsWebPart extends React.Component<IAllElementS
       });
   }
 
-  public getReleased(): void {
+  public getRelease(): void {
     this.setState({loading: true});
-    SharePointService.getListItemsFIltered(SharePointService.elSpeclistID, 'RELEASED')
+    SharePointService.getListItemsFIltered(SharePointService.elSpeclistID, 'RELEASE')
       .then(items => {
         this.setState({
           items: items.value,
