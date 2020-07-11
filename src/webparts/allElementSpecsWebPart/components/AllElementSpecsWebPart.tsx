@@ -24,6 +24,7 @@ export default class AllElementSpecsWebPart extends React.Component<IAllElementS
     super(props);
 
     //bind
+    this.getItemsByName = this.getItemsByName.bind(this);
     this.getElemSpecs = this.getElemSpecs.bind(this);
     this.getImplementation = this.getImplementation.bind(this);
     this.getDraft = this.getDraft.bind(this);
