@@ -118,7 +118,7 @@ export default class AllElementSpecsWebPart extends React.Component<IAllElementS
                 let previewPropsa: IDocumentCardPreviewProps = {
                   previewImages: [
                     {
-                      previewImageSrc: 'https://www.talkwalker.com/images/2020/blog-headers/image-analysis.png',
+                      previewImageSrc: 'https://edvac.sharepoint.com/sites/VIN_AVT_PCO_ElementWikiproject/SiteAssets/SitePages/VIN_AVT_PCO_ElementWikiproject/24687-AC.jpg',
                       width: 318,
                       height: 156,
                       accentColor: '#ce4b1f'
@@ -126,7 +126,8 @@ export default class AllElementSpecsWebPart extends React.Component<IAllElementS
                   ],
                 };
                 if (item.AttachmentFiles.length > 0) {
-                  previewPropsa.previewImages[0].previewImageSrc = `https://jvspdev.sharepoint.com${item.AttachmentFiles[0].ServerRelativeUrl}`
+                  //previewPropsa.previewImages[0].previewImageSrc = `https://jvspdev.sharepoint.com${item.AttachmentFiles[0].ServerRelativeUrl}`
+                  previewPropsa.previewImages[0].previewImageSrc = `https://edvac.sharepoint.com${item.AttachmentFiles[0].ServerRelativeUrl}`
                    //console.log(item.AttachmentFiles[0].ServerRelativeUrl);
                 }
       
